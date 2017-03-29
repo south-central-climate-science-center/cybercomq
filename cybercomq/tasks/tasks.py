@@ -18,6 +18,19 @@ def add(x, y):
     result = x + y
     return result
 
+@task()
+def add_usingR(x, y):
+    """
+        Generic task to batch submit to R
+		args: x and y
+        return result_url 
+    """
+    task_id = str(add_usingR.request.id)
+    resultDir = setup_result_directory(task_id)
+    host_data_resultDir = "/data/static/someapp_tasks/{0}".format(task_id)
+    runfile = "/data/static/add_usingR.R"	
+    result_url ="http://{0}/someapp_tasks/{1}/output.Rout".format(result['host'],result['task_id'])
+	return result_url
 
 	
 def setup_result_directory(task_id):

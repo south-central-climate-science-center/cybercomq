@@ -17,3 +17,12 @@ def add(x, y):
     """
     result = x + y
     return result
+
+
+	
+def setup_result_directory(task_id):
+    resultDir = os.path.join(basedir, 'someapp_tasks/', task_id)
+    os.makedirs(resultDir)
+    os.makedirs("{0}/input".format(resultDir))
+    os.makedirs("{0}/output".format(resultDir))
+    return resultDir 

@@ -30,10 +30,11 @@ def add_usingR(x, y):
     host_data_resultDir = "/data/static/someapp_tasks/{0}".format(task_id)
     runfile = "add_usingR.R"	
     #Run R Script in an R container
-    docker_opts = "-d --rm -v '/opt/someapp/data/static':/home/$USER -w /home/$USER -e USERID=$UID "
+    #docker_opts = "-d --rm -v '/opt/someapp/data/static':/home/$USER -w /home/$USER -e USERID=$UID "
+    docker_opts = "-d --rm -v '/opt/someapp/data/static':/home/dwilson1:z -w /home/dwilson1 "	
     docker_cmd ="R CMD BATCH --no-save --no-restore '--args {0} {1}' {2}".format(x,y,runfile)
     result = docker_task(docker_name="rocker/r-base",docker_opts=docker_opts,docker_command=docker_cmd,id=task_id)
-    result_url ="http://{0}/someapp_tasks/{1}/output.Rout".format(result['host'],result['task_id'])
+    result_url ="http://{0}/someapp_tasks/{1}".format(result['host'],result['task_id'])
     return result_url
 	
 def setup_result_directory(task_id):
@@ -48,4 +49,4 @@ def setup_result_directory(task_id):
 # docker run -d --rm -v "$PWD":/home/$USER -w /home/$USER -e USERID=$UID rocker/r-base R CMD BATCH '--args 2 2' ./add_usingR.R
 # docker run -d --rm -v "$PWD":/home/$USER -w /home/$USER -e USERID=$UID rocker/r-base R CMD BATCH '--args 2 2' ./someapp_tasks/add_usingR.R
 # docker run -d --rm -v "$PWD":/home/$USER -w /home/$USER -e USERID=$UID rocker/r-base R CMD BATCH --no-save --no-restore '--args 2 2' add_usingR.R
-# docker run -d --rm -v '/opt/someapp/data/static':/home/$USER -w /home/$USER -e USERID=$UID rocker/r-base R CMD BATCH --no-save --no-restore '--args 2 2' add_usingR.R
+# docker run -d --rm -v '/opt/someapp/data/static':/home/$USER:z -w /home/$USER -e USERID=$UID rocker/r-base R CMD BATCH --no-save --no-restore '--args 2 2' add_usingR.R

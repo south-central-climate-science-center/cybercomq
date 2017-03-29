@@ -28,9 +28,8 @@ def add_usingR(x, y):
     task_id = str(add_usingR.request.id)
     resultDir = setup_result_directory(task_id)
     host_data_resultDir = "/data/static/someapp_tasks/{0}".format(task_id)
-    runfile = "/data/static/add_usingR.R"	
-    result_url ="http://{0}/someapp_tasks/{1}/output.Rout".format(result['host'],result['task_id'])
-	return result_url
+    result = x + y
+    return result
 
 	
 def setup_result_directory(task_id):

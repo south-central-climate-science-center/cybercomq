@@ -20,18 +20,13 @@ def add(x, y):
 
 @task()
 def add_usingR(x, y):
-    """
-        Generic task to batch submit to R
-		args: x and y
-        return result_url 
-    """
     task_id = str(add_usingR.request.id)
     resultDir = setup_result_directory(task_id)
     host_data_resultDir = "/data/static/someapp_tasks/{0}".format(task_id)
     runfile = "add_usingR.R"	
     #Run R Script in an R container
     #docker_opts = "-d --rm -v '/opt/someapp/data/static':/home/$USER -w /home/$USER -e USERID=$UID "
-    docker_opts = "-d --rm -v '/opt/someapp/data/static':/home/dwilson1:z -w /home/dwilson1 "	
+    docker_opts = "-d --rm "	
     docker_cmd ="R CMD BATCH --no-save --no-restore '--args {0} {1}' {2}".format(x,y,runfile)
     result = docker_task(docker_name="rocker/r-base",docker_opts=docker_opts,docker_command=docker_cmd,id=task_id)
     result_url ="http://{0}/someapp_tasks/{1}".format(result['host'],result['task_id'])

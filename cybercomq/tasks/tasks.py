@@ -26,8 +26,8 @@ def add_usingR(x, y):
     runfile = "add_usingR.R"	
     #Run R Script in an R container
     #docker_opts = "-d --rm -v '/opt/someapp/data/static':/home/$USER -w /home/$USER -e USERID=$UID "
-    docker_opts = "-d "	
-    docker_cmd ="R CMD BATCH '--args {0} {1}' {2}".format(x,y,runfile)
+    docker_opts = "-v /opt/someapp/data/static:/home/dwilson1:z -w /home/dwilson1 "	
+    docker_cmd ="R CMD BATCH --no-save --no-restore '--args {0} {1}' {2}".format(x,y,runfile)
     result = docker_task(docker_name="rocker/r-base",docker_opts=docker_opts,docker_command=docker_cmd,id=task_id)
     result_url ="http://{0}/someapp_tasks/{1}".format(result['host'],result['task_id'])
     return result_url

@@ -19,7 +19,8 @@ def add(x, y):
     return result
 
 @task()
-def add_usingR():
+def add_usingR(x,y):
+    dummy = x + y
     task_id = str(add_usingR.request.id)
     resultDir = setup_result_directory(task_id)
     docker_opts = '-v /opt/someapp/data/static:/script:z '	

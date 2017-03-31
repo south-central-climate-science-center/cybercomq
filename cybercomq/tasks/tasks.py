@@ -23,7 +23,7 @@ def add_usingR(x,y):
     dummy = x + y
     task_id = str(add_usingR.request.id)
     resultDir = setup_result_directory(task_id)
-    docker_opts = '--logger=none -v /opt/someapp/data/static:/script:z -w /script'	
+    docker_opts = '--log-driver none -v /opt/someapp/data/static:/script:z -w /script'	
     docker_cmd ="Rscript /script/simple.R"
     print docker_cmd, docker_opts
     result = docker_task(docker_name="rocker/r-base",docker_opts=docker_opts,docker_command=docker_cmd,id=task_id)

@@ -20,11 +20,10 @@ def add(x, y):
 
 @task()
 def add_usingR(x,y):
-    dummy = x + y
     task_id = str(add_usingR.request.id)
     resultDir = setup_result_directory(task_id)
     docker_opts = '-v /opt/someapp/data/static:/script:z -w /script '	
-    docker_cmd ="Rscript /script/simple.R"
+    docker_cmd ="Rscript /script/add_usingR.R {0} {1}".format(x,y)
     print docker_cmd, docker_opts
     try:
         result = docker_task(docker_name="rocker/r-base",docker_opts=docker_opts,docker_command=docker_cmd,id=task_id)

@@ -26,11 +26,11 @@ def add_usingR(x,y):
     docker_opts = '-v /opt/someapp/data/static:/script:z -w /script '	
     docker_cmd ="Rscript /script/simple.R"
     print docker_cmd, docker_opts
-	try:
-		result = docker_task(docker_name="rocker/r-base",docker_opts=docker_opts,docker_command=docker_cmd,id=task_id)
+    try:
+        result = docker_task(docker_name="rocker/r-base",docker_opts=docker_opts,docker_command=docker_cmd,id=task_id)
     except:
-		pass 
-	result_url ="http://{0}/someapp_tasks/{1}".format("cybercom-dev.tigr.cf",task_id)
+        pass 
+    result_url ="http://{0}/someapp_tasks/{1}".format("cybercom-dev.tigr.cf",task_id)
     return result_url
 
 #--volume /opt/someapp/data/static:/home/dwilson1 

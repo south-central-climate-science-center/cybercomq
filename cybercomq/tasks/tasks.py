@@ -26,12 +26,15 @@ def add_usingR(x, y):
     runfile = "simple.R"	
     #Run R Script in an R container
     #docker_opts = "-d --rm -v '/opt/someapp/data/static':/home/$USER -w /home/$USER -e USERID=$UID "
-    docker_opts = '--volume /opt/someapp/data/static:/home/dwilson1 -w /home/dwilson1'	
+    docker_opts = '-w /home/dwilson1'	
     docker_cmd ="Rscript simple.R"
     result = docker_task(docker_name="rocker/r-base",docker_opts=docker_opts,docker_command=docker_cmd,id=task_id)
     #result_url ="http://{0}/someapp_tasks/{1}".format(result['host'],result['task_id'])
     result_url = x + y
     return result_url
+
+#--volume /opt/someapp/data/static:/home/dwilson1 
+
 	
 def setup_result_directory(task_id):
     resultDir = os.path.join(basedir, 'someapp_tasks/', task_id)
